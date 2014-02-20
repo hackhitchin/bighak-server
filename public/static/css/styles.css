@@ -1,0 +1,33 @@
+/* line 5, ../../../sass/styles.scss */
+html body {
+  background: #ffffff;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: arial, helvetica, sans-serif;
+}
+
+/* line 17, ../../../sass/styles.scss */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* line 22, ../../../sass/styles.scss */
+#keypad g.btn {
+  cursor: pointer;
+}
+
+/* line 27, ../../../sass/styles.scss */
+body.home h1 {
+  font-size: 4em;
+  position: absolute;
+  top: 70%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  text-shadow: #fff200 -2px 2px 0, #f89c0e -4px 4px 0, #ed1c24 -6px 6px 0, black -8px 8px 0, #5a5758 -10px 10px 0;
+}

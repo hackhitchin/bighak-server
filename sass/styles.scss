@@ -1,0 +1,34 @@
+@import "compass/layout/stretching";
+@import "compass/css3";
+
+html {
+  body {
+    background: #ffffff;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: arial, helvetica, sans-serif;
+
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#keypad g.btn {
+  cursor: pointer;
+}
+
+body.home {
+  h1 {
+    font-size: 4em;
+    @include stretch(70%, 0, 0, 0);
+    text-align: center;
+    @include text-shadow(rgba(#fff200, 1) -2px 2px 0, rgba(#f89c0e, 1) -4px 4px 0, rgba(#ed1c24, 1) -6px 6px 0, rgba(#000000, 1) -8px 8px 0, rgba(#5a5758, 1) -10px 10px 0);
+  }
+
+}
