@@ -17,6 +17,11 @@ module.exports = function(grunt){
             css: {
                 files: '**/*.scss',
                 tasks: ['compass']
+            },
+
+            browserify: {
+                files: 'src/**/*.js',
+                tasks: ['browserify']
             }
         },
 
@@ -26,13 +31,21 @@ module.exports = function(grunt){
                     'public/static/css/styles.min.css': ['public/static/css/styles.css']
                 }]
             }
-        }
+        },
 
+        browserify: {
+            dist: {
+                files: {
+                    'public/static/js/app/program.js': ['src/programMain.js']
+                }
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-browserify');
 
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['browserify', 'watch']);
 
 }
