@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -7,42 +6,53 @@ var express = require('express');
 var nunjucks = require('nunjucks');
 var routes = require('./routes');
 var user = require('./routes/user');
-var program = require('./routes/program');
 var http = require('http');
 var path = require('path');
+var mongoose = require("mongoose");
 
 var app = express();
 
 nunjucks.configure('views', {
-  autoescape: true,
-  express   : app
+    autoescape: true,
+    express: app
 });
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'nunjucks');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
+app.use(express.cookieParser());
+app.use(express.cookieSession({
+    key: 'bighak.sess',
+    secret: process.env["BIGHAK_SESSION_SECRET"],
+    cookie: {
+        maxAge: 2678400000 // 31 days
+    }
+}));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 app.get('/', routes.index);
 
-app.get('/program', program.keypad);
+app.get('/program', routes.keypad);
+
+app.post('/send', routes.send);
 
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+mongoose.connect('mongodb://localhost/bighak');
+
+http.createServer(app).listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
 });
