@@ -23,12 +23,9 @@ a {
   cursor: pointer;
 }
 
-body.home {
-  h1 {
-    font-size: 4em;
-    @include stretch(70%, 0, 0, 0);
-    text-align: center;
-    @include text-shadow(rgba(#fff200, 1) -2px 2px 0, rgba(#f89c0e, 1) -4px 4px 0, rgba(#ed1c24, 1) -6px 6px 0, rgba(#000000, 1) -8px 8px 0, rgba(#5a5758, 1) -10px 10px 0);
-  }
-
+h1.bigtrakify {
+  font-size: 4em;
+  @include stretch(70%, 0, 0, 0);
+  text-align: center;
+  @include text-shadow(rgba(#fff200, 1) -2px 2px 0, rgba(#f89c0e, 1) -4px 4px 0, rgba(#ed1c24, 1) -6px 6px 0, rgba(#000000, 1) -8px 8px 0, rgba(#5a5758, 1) -10px 10px 0);
 }

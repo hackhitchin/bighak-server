@@ -1,7 +1,7 @@
 /**
  * Created by robberwick on 08/02/14.
  */
-define(["jquery", 'lodash'], function ($, _) {
+define(["jquery", '../../'], function ($, _) {
 
         var mod = function () {
 

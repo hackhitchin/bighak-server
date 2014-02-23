@@ -5,7 +5,9 @@ var crypto = require("crypto");
  */
 
 exports.index = function (req, res) {
-    res.render('home.html', { title: 'Welcome' });
+    res.render('home.html', {
+        title: 'Welcome'
+    });
 };
 
 /*
@@ -13,11 +15,13 @@ exports.index = function (req, res) {
  */
 
 exports.keypad = function (req, res) {
-    res.render('keypad.html', { title: 'Program' });
+    res.render('keypad.html', {
+        title: 'Program'
+    });
 };
 
 /*
-* POST process and store submitted instruction
+ * POST process and store submitted instruction
  */
 exports.send = function (req, res) {
 
@@ -35,7 +39,7 @@ exports.send = function (req, res) {
         new Instruction({
             command: command
         }).save(function (err, model) {
-                if (err){
+                if (err) {
                     // couldn't save the model
                     res.end(JSON.stringify({
                         success: false
@@ -48,7 +52,7 @@ exports.send = function (req, res) {
                 // return success and the model id
                 res.end(JSON.stringify({
                     success: true,
-                    commandId: shasum.digest('hex').substring(0,7)
+                    commandId: shasum.digest('hex').substring(0, 7)
                 }));
             });
 

@@ -20,8 +20,8 @@ a {
   cursor: pointer;
 }
 
-/* line 27, ../../../sass/styles.scss */
-body.home h1 {
+/* line 26, ../../../sass/styles.scss */
+h1.bigtrakify {
   font-size: 4em;
   position: absolute;
   top: 70%;

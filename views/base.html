@@ -5,8 +5,8 @@
 		<link rel="stylesheet" href="/static/css/styles.css"/>
 	</head>
 
-	<body class="{% block bodyclass %}{% endblock %}">
-		{% block content %}{% endblock %}
+	<body class="{{bodyclass}}">
+		{{{ yield }}}
 
 	    <script src="/static/js/app/program.js"></script>
 	</body>
