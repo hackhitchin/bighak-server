@@ -12,6 +12,8 @@ var mongoose = require("mongoose");
 
 var app = express();
 
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/bighak';
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -50,7 +52,7 @@ app.post('/send', routes.send);
 
 app.get('/users', user.list);
 
-mongoose.connect('mongodb://localhost/bighak');
+mongoose.connect(mongoUri);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
