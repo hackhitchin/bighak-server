@@ -3,7 +3,7 @@
  */
 
 var express = require('express');
-var nunjucks = require('nunjucks');
+var hoganexpress = require('hogan-express');
 var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
@@ -12,15 +12,14 @@ var mongoose = require("mongoose");
 
 var app = express();
 
-nunjucks.configure('views', {
-    autoescape: true,
-    express: app
-});
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'nunjucks');
+
+app.engine('html', hoganexpress);
+app.set('layout', 'base'); //use layout.html as the default layout
+app.set('view engine', 'html');
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
