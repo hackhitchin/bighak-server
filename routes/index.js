@@ -23,13 +23,20 @@ exports.keypad = function (req, res) {
 /*
  * POST process and store submitted instruction
  */
-exports.send = function (req, res) {
+exports.create = function (req, res) {
 
     var shasum = crypto.createHash('sha1');
     var command = req.body.instruction;
+    var driver_name = req.body.driver_name;
+    var access_code;
 
     //set content-type header
     res.setHeader('Content-Type', 'application/json');
+
+    //generate a hash for the access code
+    shasum.update(Date.now().toString() + Math.random() * 9999);
+
+    access_code = shasum.digest('hex').substring(0, 7);
 
     // test command string against our regex
     if (!/^([FBLRPZ]{1}\d{1,2}){1,16}$/.test(command)) {
@@ -37,7 +44,9 @@ exports.send = function (req, res) {
         res.send(400);
     } else {
         new Instruction({
-            command: command
+            command: command,
+            access_code: access_code,
+            driver_name: driver_name
         }).save(function (err, model) {
                 if (err) {
                     // couldn't save the model
@@ -46,13 +55,10 @@ exports.send = function (req, res) {
                     }));
                 }
 
-                //generate a hash from the id
-                shasum.update(model.id);
-
                 // return success and the model id
                 res.end(JSON.stringify({
                     success: true,
-                    commandId: shasum.digest('hex').substring(0, 7)
+                    access_code: access_code
                 }));
             });
 

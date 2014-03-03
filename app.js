@@ -5,6 +5,7 @@
 var express = require('express');
 var hoganexpress = require('hogan-express');
 var routes = require('./routes');
+var dashboard = require('./routes/dashboard');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
@@ -48,9 +49,13 @@ app.get('/', routes.index);
 
 app.get('/program', routes.keypad);
 
-app.post('/send', routes.send);
+app.post('/create', routes.create);
 
 app.get('/users', user.list);
+
+app.get('/dashboard', dashboard.list);
+
+app.get(/\/dashboard\/send\/[a-fA-F0-9]{24}/, dashboard.send);
 
 mongoose.connect(mongoUri);
 
