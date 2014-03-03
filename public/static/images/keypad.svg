@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -8,11 +6,10 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    version="1.1"
-   width="100%"
-   height="100%"
-    viewBox="0 0 300 400"
+   width="284"
+   height="398"
     preserveAspectRatio="xMidyMid meet"
-   id="svg2">
+   id="keypad" style="border:1px solid blue">
   <defs
      id="defs4">
     <linearGradient
@@ -86,6 +83,7 @@
   </metadata>
   <g
      id="layer2"
+     transform="matrix(1,0,0,1,0,-3)"
      style="display:inline">
     <rect
        width="299.31442"
@@ -93,7 +91,7 @@
        x="2.3427887"
        y="3.280777"
        id="rect4229"
-       style="color:#000000;fill:#e0e0e1;fill-opacity:1;fill-rule:nonzero;stroke:#e0e0e1;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <path
        d="m 40.057798,176.97172 c -5.018929,0 -9.0625,4.04357 -9.0625,9.0625 l 0,137.97109 c 0,5.01893 4.043571,9.0625 9.0625,9.0625 l 35.466424,0 c 7.895362,-0.035 14.073905,7.1907 14.073905,14.98953 l 0,32.11408 c 0,5.01893 4.043571,9.0625 9.0625,9.0625 l 40.553423,0 c 5.01893,0 9.0625,-4.04357 9.0625,-9.0625 l 0,-31.40814 c 0,-7.00481 6.77282,-15.69547 13.84178,-15.69547 l 36.87697,0 c 5.01893,0 9.0625,-4.04357 9.0625,-9.0625 l 0,-137.97109 c 0,-5.01893 -4.04357,-9.0625 -9.0625,-9.0625 z"
        id="rect4117"
@@ -108,7 +106,7 @@
        id="rect3161"
        style="color:#000000;fill:#5e4b3c;fill-opacity:1;fill-rule:nonzero;stroke:#3d3127;stroke-width:2;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <g
-       id="up">
+       id="up" class="btn arrow">
       <rect
          width="50.826977"
          height="36.70837"
@@ -133,7 +131,7 @@
          style="color:#000000;fill:#ffffff;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
-       id="down">
+       id="down" class="btn arrow">
       <rect
          width="50.826977"
          height="36.70837"
@@ -158,7 +156,7 @@
          style="color:#000000;fill:#ffffff;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
-       id="right">
+       id="right" class="btn arrow">
       <rect
          width="50.826977"
          height="36.70837"
@@ -183,7 +181,7 @@
          style="color:#000000;fill:#ffffff;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
-       id="left">
+       id="left" class="btn arrow">
       <rect
          width="50.826977"
          height="36.70837"
@@ -208,7 +206,7 @@
          style="color:#000000;fill:#ffffff;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     </g>
     <g
-       id="pause">
+       id="pause" class="btn">
       <rect
          width="50.826977"
          height="36.70837"
@@ -238,7 +236,7 @@
            id="tspan3091">P</tspan></text>
     </g>
     <g
-       id="btn7">
+       id="btn7" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -268,7 +266,7 @@
            id="tspan3095">7</tspan></text>
     </g>
     <g
-       id="btn8">
+       id="btn8" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -298,7 +296,7 @@
            id="tspan3099">8</tspan></text>
     </g>
     <g
-       id="btn9">
+       id="btn9" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -328,7 +326,7 @@
            id="tspan3103">9</tspan></text>
     </g>
     <g
-       id="btn4">
+       id="btn4" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -358,7 +356,7 @@
            id="tspan3119">4</tspan></text>
     </g>
     <g
-       id="btn5">
+       id="btn5" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -388,7 +386,7 @@
            id="tspan3123">5</tspan></text>
     </g>
     <g
-       id="btn6">
+       id="btn6" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -418,7 +416,7 @@
            id="tspan3127">6</tspan></text>
     </g>
     <g
-       id="btn1">
+       id="btn1" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -448,7 +446,7 @@
            id="tspan3143">1</tspan></text>
     </g>
     <g
-       id="btn2">
+       id="btn2" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -478,7 +476,7 @@
            id="tspan3147">2</tspan></text>
     </g>
     <g
-       id="btn3">
+       id="btn3" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -508,7 +506,7 @@
            id="tspan3151">3</tspan></text>
     </g>
     <g
-       id="btn0">
+       id="btn0" class="btn num">
       <rect
          width="50.826977"
          height="36.70837"
@@ -542,7 +540,7 @@
        id="rect4122"
        style="color:#000000;fill:#5e4b3c;fill-opacity:1;fill-rule:nonzero;stroke:#3d3127;stroke-width:2;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <g
-       id="cm">
+       id="cm" class="btn">
       <rect
          width="50.826977"
          height="36.70837"
@@ -573,7 +571,7 @@
     </g>
     <g
        transform="translate(3.3982206,52.723013)"
-       id="ce">
+       id="ce" class="btn">
       <rect
          width="50.826977"
          height="36.70837"
@@ -604,7 +602,7 @@
     </g>
     <g
        transform="translate(3.3982206,109.19745)"
-       id="x2">
+       id="x2" class="btn">
       <rect
          width="50.826977"
          height="36.70837"
@@ -635,7 +633,7 @@
     </g>
     <g
        transform="translate(3.3982206,165.10427)"
-       id="test">
+       id="test" class="btn">
       <rect
          width="50.826977"
          height="36.70837"
@@ -666,7 +664,7 @@
     </g>
     <g
        transform="translate(-55.395848,275.58681)"
-       id="out">
+       id="out" class="btn">
       <rect
          width="50.826977"
          height="36.70837"
@@ -697,7 +695,7 @@
     </g>
     <g
        transform="translate(3.3982206,220.34554)"
-       id="tick">
+       id="tick" class="btn">
       <rect
          width="50.826977"
          height="36.70837"
@@ -724,7 +722,7 @@
     </g>
     <g
        transform="translate(3.3982206,275.58681)"
-       id="go">
+       id="go" class="btn">
       <rect
          width="50.826977"
          height="36.70837"
@@ -755,7 +753,7 @@
     </g>
     <g
        transform="translate(3.3982206,-1.8689079)"
-       id="pewpew">
+       id="pewpew" class="btn">
       <rect
          width="50.826977"
          height="36.70837"

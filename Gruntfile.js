@@ -36,7 +36,7 @@ module.exports = function(grunt){
         browserify: {
             dist: {
                 files: {
-                    'public/static/js/app/program.js': ['src/programMain.js']
+                    'public/static/js//bighak.js': ['src/main.js']
                 }
             }
         }

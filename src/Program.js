@@ -14,7 +14,7 @@ Program.ROTATE_RIGHT = 'R';
 Program.PAUSE = 'P';
 Program.PEWPEW = 'Z';
 
-Program.COMMANDS = [Program.FORWARD, Program.BACKWARDS, Program.ROTATE_LEFT, 
+Program.COMMANDS = [Program.FORWARD, Program.BACKWARDS, Program.ROTATE_LEFT,
 					Program.ROTATE_RIGHT, Program.PAUSE, Program.PEWPEW];
 
 
@@ -41,6 +41,8 @@ Program.prototype.add = function (command) {
 
 
 Program.prototype.removeLast = function () {
+	if (!this._sequence) throw new TypeError ('Invalid when no instructions set');
+
 	var commands = this._sequence.split(/(?=[FBLRPZ])/);
 	commands.pop();
 
