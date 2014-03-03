@@ -1,0 +1,11 @@
+
+cm - always low
+pew - low, only when valid
+ce - low, only when valid
+x2 - low, only when valid or when memory empty.
+test - start, only when first turned on.
+tick - start, only when valid. If no number entered, one is assumed.
+out - low, only when number is not required next.
+arrows - low, only when valid.
+pause - low, only when valid.
+

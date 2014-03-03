@@ -5,9 +5,7 @@ var crypto = require("crypto");
  */
 
 exports.index = function (req, res) {
-    res.render('home.html', {
-        title: 'Welcome'
-    });
+    res.render('index.html');
 };
 
 /*
