@@ -24,9 +24,15 @@
                 overflow-y: auto;
             }
 
-            #welcome img {
+            #welcome img.logo
+            {
                 width: 100%;
                 padding: 70px 0 90px
+            }
+
+            #qrcode img.logo {
+                width: 100%;
+                padding: 70px 0 20px
             }
 
             button {
@@ -132,8 +138,8 @@
     <body>
         <section id="content" class="select-device">
 
-            <section class="pane current" id="welcome">
-                <img src="/static/images/logo.svg" />
+            <section class="pane {{welcome_class}}" id="welcome">
+                <img class="logo" src="/static/images/logo.svg" />
 
                 <p class="buttons">
                     <button data-value="instructions">Instructions</button>
@@ -969,6 +975,11 @@
                         <button>Back</button> <button class="proceed">Send</button>
                     </p>
                 </form>
+            </section>
+
+            <section id="qrcode" class="pane {{qrcode_class}}">
+                <img class="logo" src="/static/images/logo.svg" />
+                <img id="qr" src="/qrcode/{{access_code}}/" alt=""/>
             </section>
 
 

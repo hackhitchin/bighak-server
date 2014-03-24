@@ -1,12 +1,11 @@
-
 var WelcomeUI = require('./ui/WelcomeUI'),
     Keypad = require('./Keypad'),
     instructions = require('./Instructions'),
+    QRCodeUI = require('./ui/QRCodeUI'),
 
     welcome = new WelcomeUI(),
-    keypad = new Keypad();
-    // instructions = new Instructions();
-    // keypad = new Keypad();
+    keypad = new Keypad(),
+    qrcode = new QRCodeUI();
 
 
 welcome.on('click', function (button) {
@@ -21,15 +20,12 @@ welcome.on('click', function (button) {
 });
 
 
-
-
-// instructions.on('hide', function () {
-//     welcome.show();
-// });
-//
-//
-//
-//
-keypad.on('hide', function () {
+keypad.on('cancel', function () {
     welcome.show();
+});
+
+keypad.on('showcode', function (opts) {
+
+    qrcode.setcode(opts);
+    qrcode.show();
 });

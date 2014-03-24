@@ -164,16 +164,14 @@ module.exports = {
 };
 
 },{}],3:[function(require,module,exports){
-(function (global){
-
 'use strict';
 
 
-var EventEmitter = require('EventEmitter').EventEmitter,
-	KeypadUI = require('./ui/KeypadUI'),
-	Program = require('./Program'),
+var EventEmitter = require('eventemitter').EventEmitter,
+    KeypadUI = require('./ui/KeypadUI'),
+    Program = require('./Program'),
 
-	keyMap = {};
+    keyMap = {};
 
 
 keyMap[KeypadUI.NUMBER_0] = 0;
@@ -194,18 +192,16 @@ keyMap[KeypadUI.PAUSE] = Program.PAUSE;
 keyMap[KeypadUI.PEWPEW] = Program.PEWPEW;
 
 
-
-
 function Keypad() {
-	var _this = this;
+    var _this = this;
 
-	this._ui = new KeypadUI();
-	this._program = new Program();
-	this._repeat = false;
+    this._ui = new KeypadUI();
+    this._program = new Program();
+    this._repeat = false;
 
-	this._ui.on('click', function (e) {
-		_this._handleKeyPress(e);
-	});
+    this._ui.on('click', function (e) {
+        _this._handleKeyPress(e);
+    });
 }
 
 
@@ -213,105 +209,127 @@ Keypad.prototype = new EventEmitter();
 Keypad.prototype.constructor = Keypad;
 
 
-
-
 Keypad.prototype._handleKeyPress = function (key) {
-	var command = keyMap[key];
+    var command = keyMap[key];
 
 
-	if (this._repeat) {
-		// If repeating, expect number
-		if (typeof command != 'number') return;
+    if (this._repeat) {
+        // If repeating, expect number
+        if (typeof command != 'number') return;
 
-		this._program.repeat(command);
-		this._repeat = false;
-		this._ui.playSound(key);
-
-
-	} else if (command) {
-		// Add command to program
-
-		try {
-			this._program.add(command);
-			this._ui.playSound(key);
-
-		} catch (e) {
-			return;
-		}
+        this._program.repeat(command);
+        this._repeat = false;
+        this._ui.playSound(key);
 
 
-	} else {
-		// Function key
+    } else if (command) {
+        // Add command to program
 
-		switch (key) {
-			case 'cm':
-				this._program.reset();
-				this._ui.playSound(key);
-				break;
+        try {
+            this._program.add(command);
+            this._ui.playSound(key);
 
-			case 'ce':
-				try {
-					this._program.removeLast();
-					this._ui.playSound(key);
-				} catch (e) {}
-				break;
+        } catch (e) {
+            return;
+        }
 
-			case 'x2':
-				this._repeat = true;
-				this._ui.playSound(key);
-				break;
 
-			case 'test':
-				// TODO: ?
-				break;
+    } else {
+        // Function key
 
-			case 'tick':
-				// TODO: ?
-				break;
+        switch (key) {
+            case 'cm':
+                this._program.reset();
+                this._ui.playSound(key);
+                break;
 
-			case 'go':
-				this._ui.playSound(key);
-				this._sendProgram();
-				break;
+            case 'ce':
+                try {
+                    this._program.removeLast();
+                    this._ui.playSound(key);
+                } catch (e) {
+                }
+                break;
 
-			case 'out':
-				this.hide();
-				break;
-		}
-	}
+            case 'x2':
+                this._repeat = true;
+                this._ui.playSound(key);
+                break;
+
+            case 'test':
+                // TODO: ?
+                break;
+
+            case 'tick':
+                // TODO: ?
+                break;
+
+            case 'go':
+                this._ui.playSound(key);
+                this._sendProgram();
+                break;
+
+            case 'out':
+                this.cancel();
+                break;
+        }
+    }
 }
-
-
 
 
 Keypad.prototype._sendProgram = function () {
-	var seq = this._program.stringify();
-	global.alert(seq);	// TODO: Something better than this.
+    var _this = this;
+    var seq = this._program.stringify();
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "/create", true);
+
+    xhr.onreadystatechange = function (aEvt) {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200){
+                var jsonResponse = JSON.parse(xhr.responseText);
+
+                console.log(jsonResponse);
+                history.pushState(jsonResponse, "bighak program " + jsonResponse.access_code, "/" + jsonResponse.access_code);
+
+                _this.showcode(jsonResponse);
+            }
+            else {
+                console.log("Error loading page\n");
+            }
+        }
+    };
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+    xhr.send(JSON.stringify({
+        driver_name: "Yuri Gagarin",
+        instruction: seq
+    }));
 }
-
-
 
 
 Keypad.prototype.show = function () {
-	this._ui.show();
-	this.emit('show');
+    this._ui.show();
+    this.emit('show');
 }
 
 
-
-
-Keypad.prototype.hide = function () {
-	this._ui.hide();
-	this.emit('hide');
+Keypad.prototype.cancel = function () {
+    this._ui.hide();
+    this.emit('cancel');
 }
 
 
-
+Keypad.prototype.showcode = function(obj){
+    console.log("showing code");
+    this._ui.hide();
+    this.emit('showcode', obj);
+}
 
 module.exports = Keypad;
 
-}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Program":4,"./ui/KeypadUI":6,"EventEmitter":1}],4:[function(require,module,exports){
+},{"./Program":4,"./ui/KeypadUI":6,"eventemitter":1}],4:[function(require,module,exports){
 
 'use strict';
 
@@ -397,15 +415,14 @@ Program.prototype.stringify = function () {
 module.exports = Program;
 
 },{}],5:[function(require,module,exports){
-
 var WelcomeUI = require('./ui/WelcomeUI'),
     Keypad = require('./Keypad'),
     instructions = require('./Instructions'),
+    QRCodeUI = require('./ui/QRCodeUI'),
 
     welcome = new WelcomeUI(),
-    keypad = new Keypad();
-    // instructions = new Instructions();
-    // keypad = new Keypad();
+    keypad = new Keypad(),
+    qrcode = new QRCodeUI();
 
 
 welcome.on('click', function (button) {
@@ -420,27 +437,23 @@ welcome.on('click', function (button) {
 });
 
 
-
-
-// instructions.on('hide', function () {
-//     welcome.show();
-// });
-//
-//
-//
-//
-keypad.on('hide', function () {
+keypad.on('cancel', function () {
     welcome.show();
 });
 
-},{"./Instructions":2,"./Keypad":3,"./ui/WelcomeUI":7}],6:[function(require,module,exports){
+keypad.on('showcode', function (opts) {
+
+    qrcode.setcode(opts);
+    qrcode.show();
+});
+},{"./Instructions":2,"./Keypad":3,"./ui/QRCodeUI":7,"./ui/WelcomeUI":8}],6:[function(require,module,exports){
 (function (global){
 
 
 'use strict';
 
 
-var EventEmitter = require('EventEmitter').EventEmitter,
+var EventEmitter = require('eventemitter').EventEmitter,
 
 	pane = global.document.getElementById('keypad'),
 	buttons = pane.querySelectorAll('.btn'),
@@ -564,14 +577,51 @@ KeypadUI.prototype.playSound = function (key) {
 module.exports = KeypadUI;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"EventEmitter":1}],7:[function(require,module,exports){
+},{"eventemitter":1}],7:[function(require,module,exports){
+(function (global){
+'use strict';
+
+var EventEmitter = require('eventemitter').EventEmitter,
+
+    pane = global.document.getElementById('qrcode'),
+    qrimg = undefined;
+
+function QRCodeUI() {
+    var _this = this;
+
+}
+
+QRCodeUI.prototype = new EventEmitter();
+QRCodeUI.prototype.contructor = QRCodeUI;
+
+
+QRCodeUI.prototype.setcode = function (opts) {
+    qrimg = document.getElementById('qr');
+    qrimg.src = "/qrcode/" + opts.access_code + "/";
+
+}
+
+
+QRCodeUI.prototype.show = function () {
+    pane.className = 'pane current';
+};
+
+
+QRCodeUI.prototype.stack = function () {
+    pane.className = 'pane stacked';
+};
+
+
+module.exports = QRCodeUI;
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"eventemitter":1}],8:[function(require,module,exports){
 (function (global){
 
 
 'use strict';
 
 
-var EventEmitter = require('EventEmitter').EventEmitter,
+var EventEmitter = require('eventemitter').EventEmitter,
 
     pane = global.document.getElementById('welcome'),
     buttons = pane.querySelectorAll('button');
@@ -616,4 +666,4 @@ WelcomeUI.prototype.stack = function () {
 module.exports = WelcomeUI;
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"EventEmitter":1}]},{},[5])
+},{"eventemitter":1}]},{},[5])
