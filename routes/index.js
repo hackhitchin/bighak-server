@@ -86,7 +86,6 @@ exports.qrcode = function (req, res) {
     Instruction.findOne({
         'access_code': access_code
     }, function (err, instruction) {
-        console.log(instruction);
         var code = qrimage.image(JSON.stringify(instruction), { type: 'svg' });
         res.type('svg');
         code.pipe(res);

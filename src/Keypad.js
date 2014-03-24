@@ -156,7 +156,6 @@ Keypad.prototype.cancel = function () {
 
 
 Keypad.prototype.showcode = function(obj){
-    console.log("showing code");
     this._ui.hide();
     this.emit('showcode', obj);
 }
