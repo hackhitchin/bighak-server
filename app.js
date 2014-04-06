@@ -57,6 +57,13 @@ app.get('/dashboard', dashboard.list);
 
 app.get(/\/dashboard\/send\/[a-fA-F0-9]{24}/, dashboard.send);
 
+app.get(/^\/([a-fA-F0-9]{7})/, routes.retrieve);
+
+app.get(/^\/qrcode\/([a-fA-F0-9]{7})/, routes.qrcode)
+
+//app.get(/\/code\/[a-fA-F0-9]{7}/, routes.generateQRCode);
+
+
 mongoose.connect(mongoUri);
 
 http.createServer(app).listen(app.get('port'), function () {

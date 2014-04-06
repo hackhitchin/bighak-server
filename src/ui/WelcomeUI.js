@@ -3,7 +3,7 @@
 'use strict';
 
 
-var EventEmitter = require('EventEmitter').EventEmitter,
+var EventEmitter = require('eventemitter').EventEmitter,
 
     pane = global.document.getElementById('welcome'),
     buttons = pane.querySelectorAll('button');

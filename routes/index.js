@@ -1,11 +1,14 @@
 var Instruction = require("../models/instruction");
 var crypto = require("crypto");
+var qrimage = require('qr-image');
 /*
  * GET home page.
  */
 
 exports.index = function (req, res) {
-    res.render('index.html');
+    res.render('index.html', {
+        welcome_class: "current"
+    });
 };
 
 /*
@@ -64,3 +67,28 @@ exports.create = function (req, res) {
     }
 
 };
+
+//Generate a completion page for the access code
+exports.retrieve = function (req, res) {
+    var access_code = req.params[0]; //access code
+    res.render(
+        'index',
+        {
+            qrcode_class: "current",
+            access_code: access_code
+        }
+    );
+};
+
+//Generate the QR code for the given access code
+exports.qrcode = function (req, res) {
+    var access_code = req.params[0]; //access code
+    Instruction.findOne({
+        'access_code': access_code
+    }, function (err, instruction) {
+        var code = qrimage.image(JSON.stringify(instruction), { type: 'svg' });
+        res.type('svg');
+        code.pipe(res);
+    })
+
+}
