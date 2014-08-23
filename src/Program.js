@@ -74,7 +74,14 @@ Program.prototype.repeat = function (count) {
 
 
 Program.prototype.stringify = function () {
-	return this._sequence;
+    var commands = this._sequence.split(/(?=[FBLRPZ])/),
+        i,
+        seqArray = [];
+
+    for(i=0; i < commands.length; i++){
+        seqArray[i] = (commands[i].length === 2) ? commands[i][0] + '0' + commands[i][1] : commands[i];
+    }
+	return seqArray.join('');
 };
 
 
