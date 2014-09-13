@@ -212,7 +212,6 @@ Keypad.prototype.constructor = Keypad;
 Keypad.prototype._handleKeyPress = function (key) {
     var command = keyMap[key];
 
-
     if (this._repeat) {
         // If repeating, expect number
         if (typeof command != 'number') return;
@@ -222,9 +221,8 @@ Keypad.prototype._handleKeyPress = function (key) {
         this._ui.playSound(key);
 
 
-    } else if (command) {
+    } else if (key in keyMap) {
         // Add command to program
-
         try {
             this._program.add(command);
             this._ui.playSound(key);
