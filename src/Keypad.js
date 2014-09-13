@@ -158,4 +158,9 @@ Keypad.prototype.showcode = function(obj){
     this.emit('showcode', obj);
 }
 
+Keypad.prototype.reset = function() {
+    history.pushState({}, 'Home', '/');
+    this._program.reset()
+}
+
 module.exports = Keypad;

@@ -324,6 +324,11 @@ Keypad.prototype.showcode = function(obj){
     this.emit('showcode', obj);
 }
 
+Keypad.prototype.reset = function() {
+    history.pushState({}, 'Home', '/');
+    this._program.reset()
+}
+
 module.exports = Keypad;
 
 },{"./Program":4,"./ui/KeypadUI":6,"eventemitter":1}],4:[function(require,module,exports){
@@ -450,6 +455,12 @@ keypad.on('showcode', function (opts) {
     qrcode.setcode(opts);
     qrcode.show();
 });
+
+qrcode.on('hidecode', function(){
+    keypad.reset();
+    qrcode.hide();
+    welcome.show();
+})
 },{"./Instructions":2,"./Keypad":3,"./ui/QRCodeUI":7,"./ui/WelcomeUI":8}],6:[function(require,module,exports){
 (function (global){
 
@@ -588,10 +599,16 @@ module.exports = KeypadUI;
 var EventEmitter = require('eventemitter').EventEmitter,
 
     pane = global.document.getElementById('qrcode'),
+    backButton = global.document.getElementById('btn-back'),
     qrimg = undefined;
 
 function QRCodeUI() {
-    var _this = this;
+    var _this = this,
+    callback = function (e) {
+        _this.emit('hidecode', this.id);
+    };
+
+    backButton.addEventListener('click', callback);
 
 }
 
@@ -610,6 +627,9 @@ QRCodeUI.prototype.show = function () {
     pane.className = 'pane current';
 };
 
+QRCodeUI.prototype.hide = function () {
+    pane.className = 'pane';
+}
 
 QRCodeUI.prototype.stack = function () {
     pane.className = 'pane stacked';

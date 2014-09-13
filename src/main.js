@@ -29,3 +29,9 @@ keypad.on('showcode', function (opts) {
     qrcode.setcode(opts);
     qrcode.show();
 });
+
+qrcode.on('hidecode', function(){
+    keypad.reset();
+    qrcode.hide();
+    welcome.show();
+})
